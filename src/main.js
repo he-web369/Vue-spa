@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 import mint from 'mint-ui'
+import './mock/mockServer'
 
 Vue.use(mint)
 Vue.config.productionTip = false

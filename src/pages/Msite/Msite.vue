@@ -3,17 +3,20 @@
     <div class="on">
       <section class="msite">
         <!--首页头部-->
-        <HeaderTop :title="address" class="header">
-          <span class="header_search" slot="header_search">
+        <HeaderTop :title="address" class="header" >
+          <router-link class="header_search" slot="header_search" to='/search'>
             <i class="iconfont icon-sousuo"></i>
-          </span>
-          <span class="header_login" slot="header_login">
-            <span class="header_login_text">登录|注册</span>
-          </span>
+          </router-link>
+          <router-link class="header_login" slot="header_login" :to="$store.state.userInfo._id ? '/userInfo':'/login'">
+            <span class="header_login_text" v-if="!$store.state.userInfo._id">登录|注册</span>
+            <span class="header_login_text" v-else>
+              <i class="iconfont icon-person" ></i> 
+            </span>
+          </router-link>
         </HeaderTop>
         <!--首页导航-->
         <nav class="msite_nav">
-          <div class="swiper-container">
+          <div class="swiper-container" v-if="categorys.length">
             <div class="swiper-wrapper">
               <div class="swiper-slide" v-for="(item,index) in categorysArr" :key='index'>
                 <a href="javascript:" class="link_to_food" v-for="(aa,index2) in item" :key='index2'>
@@ -27,6 +30,7 @@
             <!-- Add Pagination -->
             <div class="swiper-pagination"></div>
           </div>
+          <img src="../../assets/images/msite_back.svg" alt="加载前图片" v-else>
         </nav>
         <!--首页附近商家-->
         <div class="msite_shop_list">
@@ -57,6 +61,7 @@ export default {
   },
   mounted () {
     this.$store.dispatch('getCategorys')
+    this.$store.dispatch('getShops')
   },
   watch: {
     categorys(value){
@@ -98,8 +103,6 @@ export default {
 @import '../../assets/stylus/mixins.stylus'
 .msite 
   width 100%
-  .header
-    header()
   .msite_nav
     bottom-border-1px(#e4e4e4)
     margin-top 45px

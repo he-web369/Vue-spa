@@ -2,17 +2,17 @@
     <section class="profile">
         <HeaderTop class="header" title="个人信息"/>
         <section class="profile-number">
-          <router-link class="profile-link" to="/login" >
+          <router-link class="profile-link" :to="userInfo._id?'/userInfo':'/login'" >
             <div class="profile_image">
               <i class="iconfont icon-person"></i>
             </div>
             <div class="user-info">
-              <p class="user-info-top">登录/注册</p>
+              <p class="user-info-top" v-if="!userInfo.phone">{{userInfo.name||'登录/注册'}}</p>
               <p>
                 <span class="user-icon">
                   <i class="iconfont icon-shouji icon-mobile"></i>
                 </span>
-                <span class="icon-mobile-number">暂无绑定手机号</span>
+                <span class="icon-mobile-number">{{userInfo.phone||'暂无绑定手机号'}}</span>
               </p>
             </div>
             <span class="arrow">
@@ -67,7 +67,7 @@
               <i class="iconfont icon-vip"></i>
             </span>
             <div class="my_order_div">
-              <span>硅谷外卖会员卡</span>
+              <span>某某外卖会员卡</span>
               <span class="my_order_icon">
                 <i class="iconfont icon-jiantou1"></i>
               </span>
@@ -88,14 +88,32 @@
             </div>
           </a>
         </section>
+        <section class="profile_my_order border-1px">
+          <mt-button type='danger' style="width:100%" v-show="userInfo._id" @click="logout">退出登录</mt-button>
+        </section>
     </section>
 </template>
 
 <script>
 import HeaderTop from '../../components/HeaderTop/HeaderTop'
+import {mapState} from 'vuex'
+import {MessageBox} from 'mint-ui'
 export default {
   components: {
     HeaderTop
+  },
+  computed: {
+    ...mapState(['userInfo'])
+  },
+
+  methods: {
+    logout(){
+      MessageBox.confirm('确认退出吗？').then(action=>{
+        this.$store.dispatch('logout')
+      },
+      action=>{}
+      )
+    }
   }
  }
 </script>
@@ -105,8 +123,6 @@ export default {
 .profile //我的
   width 100%
   overflow hidden
-  .header
-    header()
   .profile-number
     margin-top 45.5px
     .profile-link

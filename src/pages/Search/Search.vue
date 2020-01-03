@@ -23,8 +23,6 @@ export default {
 @import '../../assets/stylus/mixins.stylus'
 .search  //搜索
   width 100%
-  .header
-    header()
   .search_form
     clearFix()
     margin-top 45px

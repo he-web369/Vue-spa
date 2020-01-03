@@ -24,8 +24,6 @@ export default {
 @import '../../assets/stylus/mixins.stylus'
 .order  //订单
   width 100%
-  .header
-    header()
   .order_no_login
     padding-top 140px
     width 60%
