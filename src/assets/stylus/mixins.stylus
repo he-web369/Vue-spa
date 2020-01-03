@@ -55,6 +55,7 @@ clearFix()
     clear both
 
 header()
+.header
   bottom-border-1px(#e4e4e4)
   background-color #02a774
   position fixed
@@ -83,7 +84,7 @@ header()
     text-align center
     .header_title_text
       font-size 20px
-      color #fff
+      color white
       display block
   .header_login
     font-size 14px
@@ -93,4 +94,4 @@ header()
     top 50%
     transform translateY(-50%)
     .header_login_text
-      color #fff
+      color white
