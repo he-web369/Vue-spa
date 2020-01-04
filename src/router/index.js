@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Msite from '../pages/Msite/Msite.vue'
+const Msite=()=> import('../pages/Msite/Msite.vue') //路由组件懒加载
 import Search from '../pages/Search/Search.vue'
 import Order from '../pages/Order/Order.vue'
 import Profile from '../pages/Profile/Profile.vue'

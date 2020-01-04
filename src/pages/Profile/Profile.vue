@@ -120,7 +120,7 @@ export default {
 
 <style  lang='stylus' rel='stylesheet/stylus'>
 @import '../../assets/stylus/mixins.stylus'
-.profile //我的
+.profile 
   width 100%
   overflow hidden
   .profile-number

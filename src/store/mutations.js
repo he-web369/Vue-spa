@@ -4,7 +4,7 @@ import {
     RECEIVE_ADDRESS,RECEIVE_SHOPS,RECEIVE_CATEGORY,
     RECEIVE_USERINFO,RESET_USER_INFO,RECEIVE_SHOP_GOODS,
     RECEIVE_SHOP_RATINGS,RECEIVE_SHOP_INFO,DECREMENT_FOOD_COUNT,
-    INCREMENT_FOOD_COUNT
+    INCREMENT_FOOD_COUNT,CLEAR_CART,RECEIVE_SEARCH_SHOPS
 } from './mutation-types'
 
 export default {
@@ -49,5 +49,14 @@ export default {
         }else{
             food.count++
         }
+    },
+    [CLEAR_CART](state){
+        state.cartFoods.forEach(item=>{
+            item.count=0
+        })
+        state.cartFoods=[]
+    },
+    [RECEIVE_SEARCH_SHOPS](state,{searchShops}){
+        state.searchShops=searchShops
     }
 }

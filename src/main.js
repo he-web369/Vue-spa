@@ -6,8 +6,12 @@ import router from './router'
 import store from './store'
 import mint from 'mint-ui'
 import './mock/mockServer'
+import VueLazyload from 'vue-lazyload'
+import loading from './assets/images/loading.jpg'
+import './filters'
 
 Vue.use(mint)
+Vue.use(VueLazyload,{loading})//图片懒加载
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

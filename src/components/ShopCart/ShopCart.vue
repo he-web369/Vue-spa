@@ -21,7 +21,7 @@
           <div class="shopcart-list" v-if="changeShow">
             <div class="list-header">
               <h1 class="title"></h1>
-              <span class="empty" />清空</span>
+              <span class="empty" @click="clearCart" >清空</span>
             </div>
             <div class="list-content">
               <ul>
@@ -47,6 +47,9 @@
 <script>
 import {mapState,mapGetters} from 'vuex'
 import CartControl from '../CartControl/CartControl'
+import BScroll  from 'better-scroll'
+import {MessageBox} from 'mint-ui'
+
 export default {
   computed: {
     ...mapState(['cartFoods','info']),
@@ -72,6 +75,17 @@ export default {
         this.isShow=false
         return false
       }
+      if(this.isShow){
+        this.$nextTick(()=>{
+          if(!this.scroll){
+            this.scroll=new BScroll('.list-content',{
+            click:true
+            })
+          }else{
+            this.scroll.refresh()//刷新滚动条
+          }
+        })
+      }
       return this.isShow
     }
   },
@@ -88,6 +102,11 @@ export default {
       if(this.totalCount>0){
         this.isShow=!this.isShow
       }
+    },
+    clearCart(){
+      MessageBox.confirm(`确认清空购物车吗？`).then(action=>{
+        this.$store.dispatch('clearCart')
+      },action=>{})
     }
   }
 }

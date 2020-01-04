@@ -22,7 +22,7 @@ export default {
 
 <style scoped scoped lang='stylus' rel='stylesheet/stylus'>
 @import '../../assets/stylus/mixins.stylus'
-.order  //订单
+.order  
   width 100%
   .order_no_login
     padding-top 140px
